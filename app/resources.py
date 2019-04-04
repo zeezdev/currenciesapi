@@ -20,18 +20,23 @@ def index():
 class ApiCurrencies(Resource):
 
     def get(self):
-        return jsonify(
-            Currency.objects().to_json()
+        result = Currency.objects().to_json()
+        return app.response_class(
+            response=result,
+            mimetype='application/json'
         )
 
 
 @api.route('/currencies/<code>')
-@api.response(404, 'Currency not found.')
 class ApiCurrenciesDetail(Resource):
 
+    @api.response(200, 'Success')
+    @api.response(404, 'Currency not found')
     def get(self, code):
-        return jsonify(
-            Currency.objects.get(code=code).to_json()
+        result = Currency.objects.get(code=code).to_json()
+        return app.response_class(
+            response=result,
+            mimetype='application/json'
         )
 
 # API
