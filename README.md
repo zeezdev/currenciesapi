@@ -15,23 +15,30 @@ Project provides an access to rates of currencies (current and historical) by me
 │   ├── resources.py
 │   ├── settings.py
 │   └── tools.py
+├── deploy
+│   ├── nginx.conf
+│   └── supervisor.conf
 ├── manage.py
 ├── populate_data.js
 ├── populate_data.sh
 ├── README.md
 ├── requirements.txt
-└── run.sh
+├── run_dev_server.sh
+└── run.py
+
 ``` 
 
 **manage.py** - Python interface to run project
 
 **populate_data.js** - JS script to prepare test data in the database
 
-**populate_data.sh** - runner for populate_data.js
+**populate_data.sh** - run script for an execution populate_data.js
 
 **requirements.txt** - Python requirements
 
-**run.sh** - project runner script
+**run.py** - entry point for deployment using Gunicorn
+
+**run_dev_server** - run script for the development
 
 **app/create_app.py** - contains `create_app()` function that setups the Flask application
 
@@ -43,7 +50,11 @@ Project provides an access to rates of currencies (current and historical) by me
 
 **app/settings.py** - configuration of the Flask application
 
-**app/tools.py** - contains `Ticker` helper class to parse and validate of tickers 
+**app/tools.py** - contains `Ticker` helper class to parse and validate of tickers
+
+**deploy/nginx.conf** - deployment configuration for Nginx (web server)
+
+**deploy/supervisor.conf** - deployment configuration for Supervisord
 
 ## Database structure
  
