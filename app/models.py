@@ -70,5 +70,5 @@ class RateHistory(AbstractRate):
         return cls.objects(
             ts__gte=dt + timedelta(minutes=-minutes),
             ts__lt=dt + timedelta(minutes=10-minutes),
-            currency__in=ticker.to_list()
+            currency__in=set(ticker.to_list())
         )

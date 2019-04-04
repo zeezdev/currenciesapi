@@ -74,8 +74,19 @@ class ApiRates(Resource):
 
         if ts:
             rates = list(RateHistory.find(ts, ticker))
-            if len(rates) != 2 and (len(rates) == 1 and 'USD' not in ticker.to_list()):
-                return 'Timestamp out of range', 400
+            if len(rates) != 2:
+                if len(rates) == 1:
+                    if ticker.is_same or 'USD' in ticker.to_list():
+                        pass  # OK  (BTC/USD)
+                    else:
+                        return 'Timestamp out of range', 400
+                elif len(rates) == 0:
+                    if ticker.is_same and ticker.first == 'USD':
+                        pass  # OK  (USD/USD)
+                    else:
+                        return 'Timestamp out of range', 400
+                else:
+                    return 'Unknown error', 500
         else:
             rates = list(Rate.find(ticker))
 

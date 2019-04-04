@@ -20,8 +20,6 @@ class Ticker(object):
         if len(ticker) != 2:
             raise ParseError('ticker must contain two currencies (for example BTC/USD)')
 
-        ticker = list(map(str.upper, ticker))
-
         # get existing currencies
         if supported_currencies is not None:
             unsupported = set(ticker) - set(supported_currencies)
@@ -32,3 +30,8 @@ class Ticker(object):
 
     def to_list(self):
         return [self.first, self.second]
+
+    @property
+    def is_same(self):
+        return self.first == self.second
+

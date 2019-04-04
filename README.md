@@ -18,6 +18,10 @@ Project provides an access to rates of currencies (current and historical) by me
 ├── deploy
 │   ├── nginx.conf
 │   └── supervisor.conf
+├── tests
+│   ├── conftest.py
+│   ├── __init__.py
+│   └── test_api.py
 ├── manage.py
 ├── populate_data.js
 ├── populate_data.sh
@@ -55,6 +59,31 @@ Project provides an access to rates of currencies (current and historical) by me
 **deploy/nginx.conf** - deployment configuration for Nginx (web server)
 
 **deploy/supervisor.conf** - deployment configuration for Supervisord
+
+**tests/conftest.py** - fixtures for tests
+
+**tests/test_api.py** - tests:
+
+```python
+def test_current_rate(client, first, second):
+    """Test of request the current rate"""
+    
+def test_current_rate_missed_ticker(client):
+    """Ticker is mandatory argument"""
+    
+def test_current_rate_invalid_ticker(client, tikcer):
+    """Ticker must have following format (<FIRST>/<SECOND>)"""
+    
+def test_historical_rate(client, first, second, ts):
+    """Test of request the historical rate"""
+    
+def test_historical_invalid_ts(client, ts):
+    """Ts argument must have following date & time format: YYYY-MM-DD hh:mm:ss"""
+    
+def test_historical_ts_out_of_range(client, ts):
+    """We know that DB contains data for 2018 year only"""           
+```
+
 
 ## Database structure
  
